@@ -3,7 +3,7 @@ pragma solidity 0.4.2
 
 contract Identity {
     address private onwer;
-    bytes8 private legacyId;
+    string private legacyId;
     string private name;
     string private surname;
     string private addressLine1;
