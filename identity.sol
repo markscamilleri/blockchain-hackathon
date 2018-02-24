@@ -1,4 +1,4 @@
-pragma solidity 0.4.21;
+pragma solidity ^0.4.20;
 
 
 contract Identity {
@@ -12,9 +12,23 @@ contract Identity {
     string private nationality;
     uint private dateOfBirth;
 
-    function getDetails() external view returns
-        (address, string, string, string, string, string, string, string, uint) {
+    bool private isRevoked = false;
 
-        return(owner, legacyId, name, surname, addressLine1, addressLine2, locality, nationality, dateOfBirth);
+    function getDetails() external view returns
+        (address, string, string, string, string, string, string, string, uint, bool) {
+
+        return(owner, legacyId, name, surname, addressLine1, addressLine2,
+            locality, nationality, dateOfBirth, isRevoked);
     }
+
+    modifier onlyBy(address who) {
+        require(msg.sender == who);
+        _;
+    }
+
+    function generateRevocationCertificate() public onlyBy(owner) view returns (bytes32) {
+        return keccak(owner);
+    }
+
+    function revoke() public onlyBy(owner);
 }
