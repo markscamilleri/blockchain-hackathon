@@ -3,6 +3,7 @@ pragma solidity 0.4.2
 
 contract Identity {
     address private onwer;
+    bytes8 private legacyId;
     string private name;
     string private surname;
     string private addressLine1;
@@ -12,6 +13,6 @@ contract Identity {
     uint private dateOfBirth;
 
     function getDetails() public view {
-        return(owner, name, surname, addressLine1, addressLine2, locality, nationality, dateOfBirth)
+        return(owner, legacyId, name, surname, addressLine1, addressLine2, locality, nationality, dateOfBirth)
     }
 }
