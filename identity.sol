@@ -14,6 +14,8 @@ contract Identity {
 
     bool private isRevoked = false;
 
+    bytes32 private hashedRevocationCertificate;
+
     function getDetails() external view returns
         (address, string, string, string, string, string, string, string, uint, bool) {
 
@@ -26,9 +28,14 @@ contract Identity {
         _;
     }
 
-    function generateRevocationCertificate() public onlyBy(owner) view returns (bytes32) {
-        return keccak(owner);
+    function generateRevocationCertificate() public onlyBy(owner) returns (bytes32) {
+        bytes32 revocationCertificte = keccak256(this, owner, block.number, block.gaslimit);
+        hashedRevocationCertificate = keccak256(revocationCertificte);
+        return revocationCertificte;
     }
 
-    function revoke() public onlyBy(owner);
+    function revoke(bytes32 cert) public {
+        require(keccak256(cert) == hashedRevocationCertificate);
+        isRevoked = true;
+    }
 }
