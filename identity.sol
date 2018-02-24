@@ -6,21 +6,22 @@ contract Identity {
     string private legacyId;
     string private name;
     string private surname;
-    string private addressLine1;
-    string private addressLine2;
     string private locality;
     string private nationality;
     uint private dateOfBirth;
+
+    enum Gender {MALE, FEMALE, X}
+    Gender private gender;
+
 
     bool private isRevoked = false;
 
     bytes32 private hashedRevocationCertificate;
 
     function getDetails() external view returns
-        (address, string, string, string, string, string, string, string, uint, bool) {
+        (address, string, string, string, string, string, Gender, uint, bool) {
 
-        return(owner, legacyId, name, surname, addressLine1, addressLine2,
-            locality, nationality, dateOfBirth, isRevoked);
+        return(owner, legacyId, name, surname, locality, nationality, gender, dateOfBirth, isRevoked);
     }
 
     modifier onlyBy(address who) {
