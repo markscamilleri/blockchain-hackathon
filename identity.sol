@@ -1,8 +1,8 @@
-pragma solidity 0.4.2
+pragma solidity 0.4.21;
 
 
 contract Identity {
-    address private onwer;
+    address private owner;
     string private legacyId;
     string private name;
     string private surname;
@@ -12,7 +12,9 @@ contract Identity {
     string private nationality;
     uint private dateOfBirth;
 
-    function getDetails() public view {
-        return(owner, legacyId, name, surname, addressLine1, addressLine2, locality, nationality, dateOfBirth)
+    function getDetails() external view returns
+        (address, string, string, string, string, string, string, string, uint) {
+
+        return(owner, legacyId, name, surname, addressLine1, addressLine2, locality, nationality, dateOfBirth);
     }
 }
