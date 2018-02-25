@@ -19,7 +19,7 @@ contract IdentityModuleFactory {
         _;
     }
 
-    function IdentityModuleFactory() {
+    function IdentityModuleFactory() external {
         authorizedAuthorities[msg.sender] = true;
         owner = msg.sender;
     }
