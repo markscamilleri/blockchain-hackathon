@@ -34,6 +34,4 @@ contract Factory {
     function changeOwner(address newOwner) public isAuthorized(newOwner) isNotOwner(newOwner) {
         owner = newOwner;
     }
-
-    function getFactoryName() internal view returns (string); //force this to be abstract
 }

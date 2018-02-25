@@ -53,6 +53,7 @@ contract IdentityFactory is Factory {
                                                         toAdd.nationality,
                                                         toAdd.dateOfBirth,
                                                         toAdd.gender);
+        return identitiesIssued[toAdd.legacyId];
     }
 
     function lookupIdentity(string legacyId) external view returns (Identity) {
@@ -124,6 +125,10 @@ contract Identity {
     function deregisterModule(address factoryAddress) external hasModulesRegistered() returns (bool) {
         delete modulesRegistered[factoryAddress];
         return --modulesRegisteredSize >= 0 && !modulesRegistered[factoryAddress].isInitialized();
+    }
+
+    function lookupModule(address factoryAddress) external hasModulesRegistered() view returns (IdentityModule) {
+        return modulesRegistered[factoryAddress];
     }
 
     function getDetails() external view returns
