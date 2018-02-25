@@ -1,10 +1,7 @@
-pragma solidity ^0.4.20;
-
-import "identity.sol";
-import "identity_module_authority.sol";
+pragma solidity ^0.4.19;
 
 
-contract IdentityModuleFactory {
+contract Factory {
     address public owner;
 
     mapping(address => bool) private authorizedAuthorities;
@@ -19,10 +16,12 @@ contract IdentityModuleFactory {
         _;
     }
 
-    function IdentityModuleFactory() external {
+    function Factory() internal {
         authorizedAuthorities[msg.sender] = true;
         owner = msg.sender;
     }
+
+    function createObject() external isAuthorized(msg.sender) returns (address);
 
     function giveAuthorizationTo(address newAuth) public isAuthorized(msg.sender) {
         authorizedAuthorities[newAuth] = true;
@@ -37,18 +36,4 @@ contract IdentityModuleFactory {
     }
 
     function getFactoryName() internal view returns (string); //force this to be abstract
-}
-
-
-contract IdentityModule {
-    Identity public owner;
-    bool public isInitialized = false;
-
-    function IdentityModule(Identity _owner) internal {
-        owner = _owner;
-        isInitialized = true;
-        require(owner.registerModule(owner, this));
-    }
-
-    function getModuleName() internal view returns (string); // force this to be abstract
 }
