@@ -57,12 +57,12 @@ contract IdentityFactory is Factory {
         return identitiesIssued[toAdd.legacyId];
     }
 
-    function getLastObjectCreated() external view returns (Identity) {
-        return lookupIdentity(lastLegacyId);
-    }
-
     function lookupIdentity(string legacyId) external view returns (Identity) {
         return identitiesIssued[legacyId];
+    }
+
+    function getLastObjectCreated() external view returns (Identity) {
+        return identitiesIssued[lastLegacyId];
     }
 
     function strEmpty(string str) internal pure returns (bool) {
