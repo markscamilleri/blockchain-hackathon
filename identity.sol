@@ -3,8 +3,14 @@ pragma solidity ^0.4.20;
 import "identity_module.sol";
 
 
+contract IdentityFactory {
+  
+}
+
+
 contract Identity {
     address public owner;
+    address public issuingAuthority;
     string public legacyId;
     string public name;
     string public surname;
@@ -50,9 +56,9 @@ contract Identity {
     }
 
     function getDetails() external view returns
-        (address, string, string, string, string, string, Gender, uint, bool) {
+        (address, address, string, string, string, string, string, Gender, uint, bool) {
 
-        return(owner, legacyId, name, surname, locality, nationality, gender, dateOfBirth, isRevoked);
+        return(owner, issuingAuthority, legacyId, name, surname, locality, nationality, gender, dateOfBirth, isRevoked);
     }
 
     function generateRevocationCertificate() public onlyBy(owner) returns (bytes32) {
