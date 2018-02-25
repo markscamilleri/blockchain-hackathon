@@ -1,5 +1,5 @@
 pragma solidity ^0.4.18;
-pragma experimental ABIEncoderV2;
+//pragma experimental ABIEncoderV2;
 contract Qualifications{
     struct Qualification{ //Attributes related to qualification
         address qAddress;
@@ -19,7 +19,7 @@ of the LegacyID with the Qualification Count of the Person
     
     function _addQual(string _legacyID, uint8 _qualCount, address _address, string _name, uint24 _dateAttained, string _institute, string _grade) returns(uint8, uint256){
         
-        qualUniqueID = _generateQualID(string _legacyID, uint8 _qualCount);
+        uint256 qualUniqueID = _generateQualID(_legacyID, _qualCount);
         
         qualStructs[qualUniqueID].qAddress=_address;
         qualStructs[qualUniqueID].qName=_name;
@@ -29,7 +29,7 @@ of the LegacyID with the Qualification Count of the Person
         
         uint8 newQualCount = _qualCount++;
         globalQuals.push(qualUniqueID);
-        return newQualCount;
+        return (newQualCount, qualUniqueID) ;
     }
     
     function _generateQualID(string _legacyID, uint8 _qualCount) returns (uint256){
@@ -47,8 +47,7 @@ of the LegacyID with the Qualification Count of the Person
         return(qualIDs);
     }
     
-    function _getQualInfo(uint256 _qualIndex, Qualification _qualArray)returns(
-        address, string, uint24, string, string){
+    function _getQualInfo(uint256 _qualIndex)returns(address, string, uint24, string, string){
             
         return (qualStructs[_qualIndex].qAddress, qualStructs[_qualIndex].qName, 
         qualStructs[_qualIndex].qDateAttained, qualStructs[_qualIndex].qInstitute, 
