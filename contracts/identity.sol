@@ -54,14 +54,14 @@ contract IdentityFactory is Factory {
                                                         toAdd.dateOfBirth);
     }
 
+    function lookupIdentity(string legacyId) external view returns (Identity) {
+        return identitiesIssued[legacyId];
+    }
+
     function strEmpty(string str) internal returns (bool) {
         bytes memory bytesStr = bytes(str);
 
         return bytesStr.length == 0;
-    }
-
-    function lookupIdentity(string legacyId) external view returns (Identity) {
-      return identitiesIssued[legacyId];
     }
 }
 
