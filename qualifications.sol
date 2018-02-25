@@ -1,4 +1,5 @@
 pragma solidity ^0.4.18;
+pragma experimental ABIEncoderV2;
 contract Qualifications{
     struct Qualification{ //Attributes related to qualification
         address qAddress;
@@ -16,55 +17,41 @@ of the LegacyID with the Qualification Count of the Person
     mapping(uint => Qualification) qualStructs;
     uint256[] globalQuals;
     
-    function _addQualFunc(uint256 _qualUniqueID, address _Address, string _Name, uint24 _DateAttained, string _Institute, string _Grade){
+    function _addQual(string _legacyID, uint8 _qualCount, address _address, string _name, uint24 _dateAttained, string _institute, string _grade) returns(uint8, uint256){
         
-        qualStructs[_qualUniqueID].qAddress=_Address;
-        qualStructs[_qualUniqueID].qName=_Name;
-        qualStructs[_qualUniqueID].qDateAttained=_DateAttained;
-        qualStructs[_qualUniqueID].qInstitute=_Institute;
-        qualStructs[_qualUniqueID].qGrade=_Grade;
+        qualUniqueID = _generateQualID(string _legacyID, uint8 _qualCount);
         
-        globalQuals.push(_qualUniqueID);
+        qualStructs[qualUniqueID].qAddress=_address;
+        qualStructs[qualUniqueID].qName=_name;
+        qualStructs[qualUniqueID].qDateAttained=_dateAttained;
+        qualStructs[qualUniqueID].qInstitute=_institute;
+        qualStructs[qualUniqueID].qGrade=_grade;
+        
+        uint8 newQualCount = _qualCount++;
+        globalQuals.push(qualUniqueID);
+        return newQualCount;
     }
     
-    function _generateQualID(string _LegacyID, uint8 _QualCount) returns (uint256){
-        string memory stringQualCount = bytes32ToString(bytes32(_QualCount));
-        //string a = "ads";
-        //string b = "hfg";
-        string memory preHash = strConcat(_LegacyID, stringQualCount);
-        uint256 qualUniqueID = uint256(keccak256(preHash));
-        
+    function _generateQualID(string _legacyID, uint8 _qualCount) returns (uint256){
+        uint256 qualUniqueID = uint256(keccak256(_legacyID,_qualCount));
         return qualUniqueID;
     }
     
-    function _
-    
-    function strConcat(string _a, string _b) internal returns (string){
-        bytes memory _ba = bytes(_a);                
-        bytes memory _bb = bytes(_b);
-        string memory fullString = new string(_ba.length + _bb.length);
-        bytes memory bytesFullString = bytes(fullString);
-        uint k = 0;
-        for (uint i = 0; i < _ba.length; i++) bytesFullString[k++] = _ba[i];
-        for (i = 0; i < _bb.length; i++) bytesFullString[k++] = _bb[i];
-        return string(bytesFullString);
-    }  
-    
-     function bytes32ToString(bytes32 x) constant returns (string) {
-        bytes memory bytesString = new bytes(32);
-        uint charCount = 0;
-        for (uint j = 0; j < 32; j++) {
-            byte char = byte(bytes32(uint(x) * 2 ** (8 * j)));
-            if (char != 0) {
-                bytesString[charCount] = char;
-                charCount++;
-            }
+    function _getQualIDsByPerson(string _legacyID, uint8 _qualCount) returns (uint256[]){
+        uint256[] qualIDs;
+        uint256 elemQualID;
+        for(uint i=1; i<=_qualCount;i++){
+            elemQualID= _generateQualID( _legacyID, _qualCount);
+            qualIDs.push(elemQualID); 
         }
-        bytes memory bytesStringTrimmed = new bytes(charCount);
-        for (j = 0; j < charCount; j++) {
-            bytesStringTrimmed[j] = bytesString[j];
-        }
-        return string(bytesStringTrimmed);
+        return(qualIDs);
     }
- 
+    
+    function _getQualInfo(uint256 _qualIndex, Qualification _qualArray)returns(
+        address, string, uint24, string, string){
+            
+        return (qualStructs[_qualIndex].qAddress, qualStructs[_qualIndex].qName, 
+        qualStructs[_qualIndex].qDateAttained, qualStructs[_qualIndex].qInstitute, 
+        qualStructs[_qualIndex].qGrade);
+    }
 }
