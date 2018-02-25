@@ -1,67 +1,54 @@
-pragma solidity ^0.4.18;
-//pragma experimental ABIEncoderV2;
+pragma solidity ^0.4.19;
+
+//import "browser/identity_module.sol";
 contract Qualifications{
-    struct Qualification{ //Attributes related to qualification
-        address qAddress; //Idk forgot
-        string qName; //Olvl- Maths
-        uint24 qDateAttained; //E.g. 01012018  
+    struct OwnerQualification{ //Attributes related to qualification
+        //address qOwnerAddress; //Address of Owner
+        string qType; //O'Level
+        string qSubject; //Maths
+        uint24 qDateAttained; //E.g. 20181231 
         string qInstitute; //MATSEC
         string qGrade; //2
     }
     
-/*
-Process: The indexes of an array with the attributes of a qualification, are recorded into another
-array, not to have duplicates (thus overriding) a Keccak is done with the hash of a string concetation
-of the LegacyID with the Qualification Count of the Person
-*/
-    mapping(uint => Qualification) qualStructs;
-    uint256[] globalQuals;
+    OwnerQualification[] ownerQualifications;
     
-    function _addQual(string _legacyID, uint8 _qualCount, address _address, string _name, uint24 _dateAttained, string _institute, string _grade) returns(uint8, uint256){
+    function _addQual(string _type, string _subject, 
+    uint24 _dateAttained, string _institute, string _grade) public {
+
+        //ownerQualifications[_qualCount].qType=_type;
+        //ownerQualifications[_qualCount].qSubject=_subject;
+        //ownerQualifications[_qualCount].qDateAttained=_dateAttained;
+        //ownerQualifications[_qualCount].qInstitute=_institute;
+        //ownerQualifications[_qualCount].qGrade=_grade;
         
-        uint256 qualUniqueID = _generateQualID(_legacyID, _qualCount);
+        //uint8 newQualCount = _qualCount++;
         
-        qualStructs[qualUniqueID].qAddress=_address;
-        qualStructs[qualUniqueID].qName=_name;
-        qualStructs[qualUniqueID].qDateAttained=_dateAttained;
-        qualStructs[qualUniqueID].qInstitute=_institute;
-        qualStructs[qualUniqueID].qGrade=_grade;
-        
-        uint8 newQualCount = _qualCount++;
-        globalQuals.push(qualUniqueID);
-        return (newQualCount, qualUniqueID) ;
+        ownerQualifications.push(
+            OwnerQualification(_type, _subject, _dateAttained, _institute, _grade));
     }
     
-    function _generateQualID(string _legacyID, uint8 _qualCount) returns (uint256){
-        uint256 qualUniqueID = uint256(keccak256(_legacyID,_qualCount));
-        return qualUniqueID;
+    function _getQualInfo(uint _qualIndex) external returns(string, string, uint24, string, string){
+        return (ownerQualifications[_qualIndex].qType, ownerQualifications[_qualIndex].qSubject, 
+        ownerQualifications[_qualIndex].qDateAttained, ownerQualifications[_qualIndex].qInstitute, 
+        ownerQualifications[_qualIndex].qGrade);
     }
-    
-    function _getQualIDsByPerson(string _legacyID, uint8 _qualCount) returns (uint256[]){
-        uint256[] qualIDs;
-        uint256 elemQualID;
-        for(uint i=1; i<=_qualCount;i++){
-            elemQualID= _generateQualID( _legacyID, _qualCount);
-            qualIDs.push(elemQualID); 
-        }
-        return(qualIDs);
-    }
-    
-    function _getQualInfo(uint256 _qualIndex)returns(address, string, uint24, string, string){
-            
-        return (qualStructs[_qualIndex].qAddress, qualStructs[_qualIndex].qName, 
-        qualStructs[_qualIndex].qDateAttained, qualStructs[_qualIndex].qInstitute, 
-        qualStructs[_qualIndex].qGrade);
-    }
-    
 }
 
-contract Interface{
-    function _addQual(string _legacyID, uint8 _qualCount, address _address, string _name,
-    uint24 _dateAttained, string _institute, string _grade) returns(uint8, uint256);
-    function _generateQualID(string _legacyID, uint8 _qualCount) returns (uint256);
-    function _getQualIDsByPerson(string _legacyID, uint8 _qualCount) returns (uint256[]);
-    function _getQualInfo(uint256 _qualIndex)returns(address, string, uint24, string, string);
-    
-    
+contract QualFactory{
+    function _addQualification(uint8 _qualCount, string _type,
+    string _subject, uint24 _dateAttained, string _institute, string _grade) 
+    public{
+        Qualifications qlf = new Qualifications();
+        qlf._addQual(_type, _subject, _dateAttained, _institute, _grade);
+    } 
+}
+
+contract DeployQualFactory{
+    function _deployAddQualification(uint8 _qualCount, string _type,
+    string _subject, uint24 _dateAttained, string _institute, string _grade) external{
+        QualFactory qlfFac = new QualFactory();
+        qlfFac._addQualification(_qualCount, _type, _subject,
+        _dateAttained, _institute, _grade);
+    }
 }
