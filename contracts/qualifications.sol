@@ -54,7 +54,7 @@ contract Qualifications is IdentityModule {
 contract QualificationsFactory is Factory {
 
     struct Qual {
-        bool isEmpty;
+        bool isInUse;
         Identity owner;
         string qualificationType;
         string subject;
@@ -66,7 +66,7 @@ contract QualificationsFactory is Factory {
     Qual private toAdd;
 
     modifier isNotEmpty(Qual toCheck) {
-        require(!toCheck.isEmpty);
+        require(toCheck.isInUse);
         _;
     }
 
@@ -79,13 +79,13 @@ contract QualificationsFactory is Factory {
         qualifications._addQual(toAdd.qualificationType, toAdd.subject,
         toAdd.dateAttained, toAdd.institute, toAdd.level);
 
-        toAdd.isEmpty = true;
+        toAdd.isInUse = false;
 
         return qualifications;
     }
 
     function _setQualificationToAdd(Identity _owner, string _type, string _subject,
     uint _dateAttained, string _institute, uint _level) public isAuthorized(msg.sender) {
-        toAdd = Qual(false, _owner, _type, _subject, _dateAttained, _institute, _level);
+        toAdd = Qual(true, _owner, _type, _subject, _dateAttained, _institute, _level);
     }
 }

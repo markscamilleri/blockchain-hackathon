@@ -7,6 +7,7 @@ contract IdentityFactory is Factory {
     mapping(string => Identity) private identitiesIssued;
 
     struct ID {
+        bool isInUse;
         address owner;
         string legacyId;
         string name;
@@ -21,18 +22,13 @@ contract IdentityFactory is Factory {
     ID private toAdd;
 
     modifier isNotEmpty(ID toCheck) {
-        require(toCheck.owner != 0x0 &&
-                !strEmpty(toCheck.legacyId) &&
-                !strEmpty(toCheck.name) &&
-                !strEmpty(toCheck.surname) &&
-                !strEmpty(toCheck.locality) &&
-                !strEmpty(toCheck.nationality) &&
-                toCheck.dateOfBirth > 0);
+        require(toCheck.isInUse);
         _;
     }
 
     function setID(address owner, string legacyId, string name, string surname,
     string locality, string nationality, uint dateOfBirth, Identity.Gender gender) external isAuthorized(msg.sender) {
+        toAdd.isInUse = true;
         toAdd.owner = owner;
         toAdd.legacyId = legacyId;
         toAdd.name = name;
@@ -53,6 +49,7 @@ contract IdentityFactory is Factory {
                                                         toAdd.nationality,
                                                         toAdd.dateOfBirth,
                                                         toAdd.gender);
+        toAdd.isInUse = false;                                                        
         return identitiesIssued[toAdd.legacyId];
     }
 
