@@ -1,7 +1,7 @@
-pragma solidity ^0.4.20;
+pragma solidity ^0.4.19;
 
-import "identity.sol";
-import "factory.sol";
+import "./Identity.sol";
+import "./Factory.sol";
 
 
 contract IdentityModule {

@@ -1,0 +1,587 @@
+{
+  "contractName": "IdentityModule",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "isInitialized",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_owner",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.4.19;\n\nimport \"./Identity.sol\";\nimport \"./Factory.sol\";\n\n\ncontract IdentityModule {\n    Identity public owner;\n    bool public isInitialized = false;\n\n    function IdentityModule(Identity _owner) internal {\n        owner = _owner;\n        isInitialized = true;\n        require(owner.registerModule(owner, this));\n    }\n\n    function getModuleName() internal view returns (string); // force this to be abstract\n}\n",
+  "sourcePath": "/home/mark/git_synced/blockchain-hackathon/contracts/IdentityModule.sol",
+  "ast": {
+    "attributes": {
+      "absolutePath": "/home/mark/git_synced/blockchain-hackathon/contracts/IdentityModule.sol",
+      "exportedSymbols": {
+        "IdentityModule": [
+          631
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.4",
+            ".19"
+          ]
+        },
+        "id": 596,
+        "name": "PragmaDirective",
+        "src": "0:24:3"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 397,
+          "absolutePath": "/home/mark/git_synced/blockchain-hackathon/contracts/Identity.sol",
+          "file": "./Identity.sol",
+          "scope": 632,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 597,
+        "name": "ImportDirective",
+        "src": "26:24:3"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 109,
+          "absolutePath": "/home/mark/git_synced/blockchain-hackathon/contracts/Factory.sol",
+          "file": "./Factory.sol",
+          "scope": 632,
+          "symbolAliases": [
+            null
+          ],
+          "unitAlias": ""
+        },
+        "id": 598,
+        "name": "ImportDirective",
+        "src": "51:23:3"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": false,
+          "linearizedBaseContracts": [
+            631
+          ],
+          "name": "IdentityModule",
+          "scope": 632
+        },
+        "children": [
+          {
+            "attributes": {
+              "constant": false,
+              "name": "owner",
+              "scope": 631,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "contract Identity",
+              "value": null,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "Identity",
+                  "referencedDeclaration": 396,
+                  "type": "contract Identity"
+                },
+                "id": 599,
+                "name": "UserDefinedTypeName",
+                "src": "107:8:3"
+              }
+            ],
+            "id": 600,
+            "name": "VariableDeclaration",
+            "src": "107:21:3"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "name": "isInitialized",
+              "scope": 631,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "bool",
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "bool",
+                  "type": "bool"
+                },
+                "id": 601,
+                "name": "ElementaryTypeName",
+                "src": "134:4:3"
+              },
+              {
+                "attributes": {
+                  "argumentTypes": null,
+                  "hexvalue": "66616c7365",
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "lValueRequested": false,
+                  "subdenomination": null,
+                  "token": "bool",
+                  "type": "bool",
+                  "value": "false"
+                },
+                "id": 602,
+                "name": "Literal",
+                "src": "162:5:3"
+              }
+            ],
+            "id": 603,
+            "name": "VariableDeclaration",
+            "src": "134:33:3"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "implemented": true,
+              "isConstructor": true,
+              "modifiers": [
+                null
+              ],
+              "name": "IdentityModule",
+              "payable": false,
+              "scope": 631,
+              "stateMutability": "nonpayable",
+              "superFunction": null,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "_owner",
+                      "scope": 625,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "contract Identity",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "contractScope": null,
+                          "name": "Identity",
+                          "referencedDeclaration": 396,
+                          "type": "contract Identity"
+                        },
+                        "id": 604,
+                        "name": "UserDefinedTypeName",
+                        "src": "198:8:3"
+                      }
+                    ],
+                    "id": 605,
+                    "name": "VariableDeclaration",
+                    "src": "198:15:3"
+                  }
+                ],
+                "id": 606,
+                "name": "ParameterList",
+                "src": "197:17:3"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 607,
+                "name": "ParameterList",
+                "src": "224:0:3"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "contract Identity"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 600,
+                              "type": "contract Identity",
+                              "value": "owner"
+                            },
+                            "id": 608,
+                            "name": "Identifier",
+                            "src": "234:5:3"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 605,
+                              "type": "contract Identity",
+                              "value": "_owner"
+                            },
+                            "id": 609,
+                            "name": "Identifier",
+                            "src": "242:6:3"
+                          }
+                        ],
+                        "id": 610,
+                        "name": "Assignment",
+                        "src": "234:14:3"
+                      }
+                    ],
+                    "id": 611,
+                    "name": "ExpressionStatement",
+                    "src": "234:14:3"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "bool"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 603,
+                              "type": "bool",
+                              "value": "isInitialized"
+                            },
+                            "id": 612,
+                            "name": "Identifier",
+                            "src": "258:13:3"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "hexvalue": "74727565",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "subdenomination": null,
+                              "token": "bool",
+                              "type": "bool",
+                              "value": "true"
+                            },
+                            "id": 613,
+                            "name": "Literal",
+                            "src": "274:4:3"
+                          }
+                        ],
+                        "id": 614,
+                        "name": "Assignment",
+                        "src": "258:20:3"
+                      }
+                    ],
+                    "id": 615,
+                    "name": "ExpressionStatement",
+                    "src": "258:20:3"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 968,
+                              "type": "function (bool) pure",
+                              "value": "require"
+                            },
+                            "id": 616,
+                            "name": "Identifier",
+                            "src": "288:7:3"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "isStructConstructorCall": false,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "type": "bool",
+                              "type_conversion": false
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_contract$_Identity_$396",
+                                      "typeString": "contract Identity"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_contract$_IdentityModule_$631",
+                                      "typeString": "contract IdentityModule"
+                                    }
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "member_name": "registerModule",
+                                  "referencedDeclaration": 272,
+                                  "type": "function (address,contract IdentityModule) external returns (bool)"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 600,
+                                      "type": "contract Identity",
+                                      "value": "owner"
+                                    },
+                                    "id": 617,
+                                    "name": "Identifier",
+                                    "src": "296:5:3"
+                                  }
+                                ],
+                                "id": 618,
+                                "name": "MemberAccess",
+                                "src": "296:20:3"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 600,
+                                  "type": "contract Identity",
+                                  "value": "owner"
+                                },
+                                "id": 619,
+                                "name": "Identifier",
+                                "src": "317:5:3"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 978,
+                                  "type": "contract IdentityModule",
+                                  "value": "this"
+                                },
+                                "id": 620,
+                                "name": "Identifier",
+                                "src": "324:4:3"
+                              }
+                            ],
+                            "id": 621,
+                            "name": "FunctionCall",
+                            "src": "296:33:3"
+                          }
+                        ],
+                        "id": 622,
+                        "name": "FunctionCall",
+                        "src": "288:42:3"
+                      }
+                    ],
+                    "id": 623,
+                    "name": "ExpressionStatement",
+                    "src": "288:42:3"
+                  }
+                ],
+                "id": 624,
+                "name": "Block",
+                "src": "224:113:3"
+              }
+            ],
+            "id": 625,
+            "name": "FunctionDefinition",
+            "src": "174:163:3"
+          },
+          {
+            "attributes": {
+              "body": null,
+              "constant": true,
+              "implemented": false,
+              "isConstructor": false,
+              "modifiers": [
+                null
+              ],
+              "name": "getModuleName",
+              "payable": false,
+              "scope": 631,
+              "stateMutability": "view",
+              "superFunction": null,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 626,
+                "name": "ParameterList",
+                "src": "365:2:3"
+              },
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "name": "",
+                      "scope": 630,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "string memory",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "string",
+                          "type": "string storage pointer"
+                        },
+                        "id": 627,
+                        "name": "ElementaryTypeName",
+                        "src": "391:6:3"
+                      }
+                    ],
+                    "id": 628,
+                    "name": "VariableDeclaration",
+                    "src": "391:6:3"
+                  }
+                ],
+                "id": 629,
+                "name": "ParameterList",
+                "src": "390:8:3"
+              }
+            ],
+            "id": 630,
+            "name": "FunctionDefinition",
+            "src": "343:56:3"
+          }
+        ],
+        "id": 631,
+        "name": "ContractDefinition",
+        "src": "77:353:3"
+      }
+    ],
+    "id": 632,
+    "name": "SourceUnit",
+    "src": "0:431:3"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.19+commit.c4cbbb05.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "1.0.1",
+  "updatedAt": "2018-02-25T15:08:52.785Z"
+}
