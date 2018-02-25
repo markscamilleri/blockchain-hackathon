@@ -2,11 +2,11 @@ pragma solidity ^0.4.18;
 //pragma experimental ABIEncoderV2;
 contract Qualifications{
     struct Qualification{ //Attributes related to qualification
-        address qAddress;
-        string qName;
+        address qAddress; //Idk forgot
+        string qName; //Olvl- Maths
         uint24 qDateAttained; //E.g. 01012018  
-        string qInstitute;
-        string qGrade;
+        string qInstitute; //MATSEC
+        string qGrade; //2
     }
     
 /*
@@ -53,4 +53,15 @@ of the LegacyID with the Qualification Count of the Person
         qualStructs[_qualIndex].qDateAttained, qualStructs[_qualIndex].qInstitute, 
         qualStructs[_qualIndex].qGrade);
     }
+    
+}
+
+contract Interface{
+    function _addQual(string _legacyID, uint8 _qualCount, address _address, string _name,
+    uint24 _dateAttained, string _institute, string _grade) returns(uint8, uint256);
+    function _generateQualID(string _legacyID, uint8 _qualCount) returns (uint256);
+    function _getQualIDsByPerson(string _legacyID, uint8 _qualCount) returns (uint256[]);
+    function _getQualInfo(uint256 _qualIndex)returns(address, string, uint24, string, string);
+    
+    
 }
