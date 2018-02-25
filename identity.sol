@@ -4,22 +4,23 @@ import "identity_module.sol";
 
 
 contract Identity {
-    address private owner;
-    string private legacyId;
-    string private name;
-    string private surname;
-    string private locality;
-    string private nationality;
-    uint private dateOfBirth;
+    address public owner;
+    string public legacyId;
+    string public name;
+    string public surname;
+    string public locality;
+    string public nationality;
+    uint public dateOfBirth;
 
     enum Gender {MALE, FEMALE, X}
-    Gender private gender;
+    Gender public gender;
 
-    bool private isRevoked = false;
+    bool public isRevoked = false;
 
     bytes32 private hashedRevocationCertificate;
 
-    IdentityModule[] private modulesRegistered;
+    mapping(address => IdentityModule) private modulesRegistered;
+    uint public modulesRegisteredSize = 0;
 
     modifier onlyBy(address who) {
         require(msg.sender == who);
@@ -27,13 +28,27 @@ contract Identity {
     }
 
     modifier hasModulesRegistered() {
-        require(modulesRegistered.length > 0);
+        require(modulesRegisteredSize > 0);
         _;
     }
 
-    function registerModule(IdentityModule module) external returns (bool) {
-        modulesRegistered.push(module);
+    modifier moduleNotRegistered(address factoryAddress) {
+        require(modulesRegistered[factoryAddress].isInitialized() == false);
+        _;
     }
+
+    // Use address or type?
+    function registerModule(address factoryAddress, IdentityModule module) external
+    moduleNotRegistered(factoryAddress) returns (bool) {
+        modulesRegistered[factoryAddress] = module;
+        return ++modulesRegisteredSize > 0 && modulesRegistered[factoryAddress].isInitialized();
+    }
+
+    function deregisterModule(address factoryAddress) external hasModulesRegistered() returns (bool) {
+        delete modulesRegistered[factoryAddress];
+        return --modulesRegisteredSize >= 0 && !modulesRegistered[factoryAddress].isInitialized();
+    }
+
     function getDetails() external view returns
         (address, string, string, string, string, string, Gender, uint, bool) {
 
