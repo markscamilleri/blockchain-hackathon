@@ -20,6 +20,7 @@ contract IdentityFactory is Factory {
     }
 
     ID private toAdd;
+    string private lastLegacyId;
 
     modifier isNotEmpty(ID toCheck) {
         require(toCheck.isInUse);
@@ -52,7 +53,12 @@ contract IdentityFactory is Factory {
                                                         toAdd.dateOfBirth,
                                                         toAdd.gender);
         toAdd.isInUse = false;
+        lastLegacyId = toAdd.legacyId;
         return identitiesIssued[toAdd.legacyId];
+    }
+
+    function getLastObjectCreated() external view returns (Identity) {
+        return lookupIdentity(lastLegacyId);
     }
 
     function lookupIdentity(string legacyId) external view returns (Identity) {
