@@ -4,18 +4,18 @@ import "identity_module.sol";
 
 
 contract IdentityFactory is Factory {
-    mapping(string => Idenitty) private identitiesIssued;
+    mapping(string => Identity) private identitiesIssued;
 
     struct ID {
-        address public owner;
-        string public legacyId;
-        string public name;
-        string public surname;
-        string public locality;
-        string public nationality;
-        uint public dateOfBirth;
+        address owner;
+        string legacyId;
+        string name;
+        string surname;
+        string locality;
+        string nationality;
+        uint dateOfBirth;
 
-        Identity.Gender public gender;
+        Identity.Gender gender;
     }
 
     ID private toAdd;
@@ -32,7 +32,7 @@ contract IdentityFactory is Factory {
     }
 
     function setID(address owner, string legacyId, string name, string surname,
-    string locality, string nationality, string dateOfBirth) external isAuthorized(msg.sender) returns () {
+    string locality, string nationality, uint dateOfBirth, Identity.Gender gender) external isAuthorized(msg.sender) {
         toAdd.owner = owner;
         toAdd.legacyId = legacyId;
         toAdd.name = name;
@@ -40,6 +40,7 @@ contract IdentityFactory is Factory {
         toAdd.locality = locality;
         toAdd.nationality = nationality;
         toAdd.dateOfBirth = dateOfBirth;
+        toAdd.gender = gender;
     }
 
     function createObject() external isNotEmpty(toAdd) returns (address) {
@@ -50,15 +51,15 @@ contract IdentityFactory is Factory {
                                                         toAdd.surname,
                                                         toAdd.locality,
                                                         toAdd.nationality,
-                                                        toAdd.gender,
-                                                        toAdd.dateOfBirth);
+                                                        toAdd.dateOfBirth,
+                                                        toAdd.gender);
     }
 
     function lookupIdentity(string legacyId) external view returns (Identity) {
         return identitiesIssued[legacyId];
     }
 
-    function strEmpty(string str) internal returns (bool) {
+    function strEmpty(string str) internal pure returns (bool) {
         bytes memory bytesStr = bytes(str);
 
         return bytesStr.length == 0;
@@ -101,13 +102,17 @@ contract Identity {
         _;
     }
 
-    function Identity external(address _owner, address _issuingAuthority, string _legacyId,
-    string _name, string _surname, string _locality, string _nationality, uint _dateOfBirth, Gender _gender) {
+    function Identity(address _owner, address _issuingAuthority, string _legacyId,
+    string _name, string _surname, string _locality, string _nationality, uint _dateOfBirth, Gender _gender) public {
         owner = _owner;
         issuingAuthority = _issuingAuthority;
         legacyId = _legacyId;
         name = _name;
-
+        surname = _surname;
+        locality = _locality;
+        nationality = _nationality;
+        dateOfBirth = _dateOfBirth;
+        gender = _gender;
     }
 
     function registerModule(address factoryAddress, IdentityModule module) external
