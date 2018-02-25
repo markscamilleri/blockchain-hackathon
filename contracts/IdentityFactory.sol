@@ -26,6 +26,8 @@ contract IdentityFactory is Factory {
         _;
     }
 
+    function IdentityFactory() public Factory() {}
+
     function setID(address owner, string legacyId, string name, string surname,
     string locality, string nationality, uint dateOfBirth, Identity.Gender gender) external isAuthorized(msg.sender) {
         toAdd.isInUse = true;

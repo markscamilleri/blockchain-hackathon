@@ -369,7 +369,7 @@
       },
       {
         "attributes": {
-          "SourceUnit": 632,
+          "SourceUnit": 638,
           "absolutePath": "/home/mark/git_synced/blockchain-hackathon/contracts/IdentityModule.sol",
           "file": "./IdentityModule.sol",
           "scope": 397,
@@ -769,7 +769,7 @@
                     "attributes": {
                       "contractScope": null,
                       "name": "IdentityModule",
-                      "referencedDeclaration": 631,
+                      "referencedDeclaration": 637,
                       "type": "contract IdentityModule"
                     },
                     "id": 140,
@@ -897,7 +897,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 968,
+                              "referencedDeclaration": 652,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -938,7 +938,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 965,
+                                      "referencedDeclaration": 649,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -1042,7 +1042,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 968,
+                              "referencedDeclaration": 652,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -1195,7 +1195,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 968,
+                              "referencedDeclaration": 652,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -1246,7 +1246,7 @@
                                       "isPure": false,
                                       "lValueRequested": false,
                                       "member_name": "isInitialized",
-                                      "referencedDeclaration": 603,
+                                      "referencedDeclaration": 609,
                                       "type": "function () view external returns (bool)"
                                     },
                                     "children": [
@@ -2148,7 +2148,7 @@
                         "attributes": {
                           "contractScope": null,
                           "name": "IdentityModule",
-                          "referencedDeclaration": 631,
+                          "referencedDeclaration": 637,
                           "type": "contract IdentityModule"
                         },
                         "id": 245,
@@ -2431,7 +2431,7 @@
                                   "isPure": false,
                                   "lValueRequested": false,
                                   "member_name": "isInitialized",
-                                  "referencedDeclaration": 603,
+                                  "referencedDeclaration": 609,
                                   "type": "function () view external returns (bool)"
                                 },
                                 "children": [
@@ -2810,7 +2810,7 @@
                                       "isPure": false,
                                       "lValueRequested": false,
                                       "member_name": "isInitialized",
-                                      "referencedDeclaration": 603,
+                                      "referencedDeclaration": 609,
                                       "type": "function () view external returns (bool)"
                                     },
                                     "children": [
@@ -2956,7 +2956,7 @@
                         "attributes": {
                           "contractScope": null,
                           "name": "IdentityModule",
-                          "referencedDeclaration": 631,
+                          "referencedDeclaration": 637,
                           "type": "contract IdentityModule"
                         },
                         "id": 305,
@@ -3703,7 +3703,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 959,
+                              "referencedDeclaration": 643,
                               "type": "function () pure returns (bytes32)",
                               "value": "keccak256"
                             },
@@ -3717,7 +3717,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 980,
+                              "referencedDeclaration": 664,
                               "type": "contract Identity",
                               "value": "this"
                             },
@@ -3757,7 +3757,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 957,
+                                  "referencedDeclaration": 641,
                                   "type": "block",
                                   "value": "block"
                                 },
@@ -3788,7 +3788,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 957,
+                                  "referencedDeclaration": 641,
                                   "type": "block",
                                   "value": "block"
                                 },
@@ -3864,7 +3864,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 959,
+                                  "referencedDeclaration": 643,
                                   "type": "function () pure returns (bytes32)",
                                   "value": "keccak256"
                                 },
@@ -4025,7 +4025,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 968,
+                              "referencedDeclaration": 652,
                               "type": "function (bool) pure",
                               "value": "require"
                             },
@@ -4074,7 +4074,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 959,
+                                      "referencedDeclaration": 643,
                                       "type": "function () pure returns (bytes32)",
                                       "value": "keccak256"
                                     },
@@ -4210,5 +4210,5 @@
   },
   "networks": {},
   "schemaVersion": "1.0.1",
-  "updatedAt": "2018-02-25T15:14:42.382Z"
+  "updatedAt": "2018-02-25T16:15:53.287Z"
 }
